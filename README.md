@@ -14,3 +14,26 @@ It has tests to ensure that:
 * log data is written in JSON format
 * all newline characters (\n) in the log data are escaped, such that each log data entry had only one unescaped newline at the end of the line -- this makes it easy to split your log files by newline in order to get each JSON string.
 
+# Installation
+
+```bash
+npm install -S logger-json-stderr # install and add as a dependency to your package.json
+```
+
+# Usage
+
+```javascript
+var logger = require('logger-json-stderr');
+logger.info('this will show up in stderr as JSON');
+```
+
+# Testing
+
+```bash
+make test
+```
+
+# License
+
+MIT
+

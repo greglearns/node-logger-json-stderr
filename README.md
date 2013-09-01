@@ -1,6 +1,6 @@
 # node-logger-json-stderr
 
-[![Build Status](https://travis-ci.org/greglearns/node-logger-json-stderr.png)](https://travis-ci.org/greglearns/node-logger-json-stderr)
+[![Build Status](https://travis-ci.org/greglearns/node-logger-json-stderr.png?branch=master)](https://travis-ci.org/greglearns/node-logger-json-stderr)
 
 Log JSON to stderr.
 

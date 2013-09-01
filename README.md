@@ -1,6 +1,6 @@
 # node-logger-json-stderr
 
-[![Build Status](https://travis-ci.org/greglearns/node-logger-json-stderr.png?branch=master)](https://travis-ci.org/greglearns/node-logger-json-stderr)
+[![Build Status](https://travis-ci.org/greglearns/node-logger-json-stderr.png?branch=master)](https://travis-ci.org/greglearns/node-logger-json-stderr) [![Dependency Status](https://david-dm.org/greglearns/node-logger-json-stderr.png)](https://david-dm.org/greglearns/node-logger-json-stderr)
 
 [![NPM](https://nodei.co/npm/logger-json-stderr.png?downloads=true)](https://nodei.co/npm/logger-json-stderr/)
 

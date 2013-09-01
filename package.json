@@ -1,6 +1,6 @@
 {
   "name": "logger-json-stderr",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "log in json-format, only to stderr, using Winston",
   "main": "index.js",
   "scripts": {

@@ -1,5 +1,7 @@
 # node-logger-json-stderr
 
+[![Build Status](https://travis-ci.org/greglearns/node-logger-json-stderr.png)](https://travis-ci.org/greglearns/node-logger-json-stderr)
+
 Log JSON to stderr.
 
 Currently, it uses [Winston](https://github.com/flatiron/winston) and [Winston-stderr](https://github.com/greglearns/winston-stderr) to do the work.

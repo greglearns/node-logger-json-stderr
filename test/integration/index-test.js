@@ -52,10 +52,25 @@ describe('logger-json-stderr', function() {
 
 	})
 
+  it('should output nothing if silent(true) is called', function(done) {
+		var expectedOutput = ''
+		exec(silentCommand('Should not write to stderr if silent'), validate)
+
+		function validate(err, stdout, stderr) {
+			expect(err).to.not.exist
+			expect(stderr).to.equal(expectedOutput)
+			done()
+		}
+  })
+
 })
 
 function command(msg) {
 	return "node -e \"require('./index').info('" + msg + "')\""
+}
+
+function silentCommand(msg) {
+	return "node -e \"var logger = require('./index'); logger.silent(true); logger.info('" + msg + "')\""
 }
 
 function writeTempfileThenDo(msg, cb) {

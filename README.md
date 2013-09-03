@@ -31,12 +31,12 @@ logger.info('this will show up in stderr as JSON');
 
 # Suppressing logging
 
-'''javascript
+```javascript
 var logger = require('logger-json-stderr');
 logger.info('this will show up in stderr as JSON');
 logger.silent(true)
 logger.info('this will not show up')
-'''
+```
 
 # Testing
 

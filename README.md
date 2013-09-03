@@ -8,6 +8,8 @@ Log JSON to stderr.
 
 Currently, it uses [Winston](https://github.com/flatiron/winston) and [Winston-stderr](https://github.com/greglearns/winston-stderr) to do the work.
 
+# What it does
+
 It has tests to ensure that:
 
 * log data is only written to stderr
@@ -26,6 +28,15 @@ npm install -S logger-json-stderr # install and add as a dependency to your pack
 var logger = require('logger-json-stderr');
 logger.info('this will show up in stderr as JSON');
 ```
+
+# Suppressing logging
+
+'''javascript
+var logger = require('logger-json-stderr');
+logger.info('this will show up in stderr as JSON');
+logger.silent(true)
+logger.info('this will not show up')
+'''
 
 # Testing
 

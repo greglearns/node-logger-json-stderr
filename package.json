@@ -1,7 +1,7 @@
 {
   "name": "logger-json-stderr",
   "version": "0.1.0",
-  "description": "log in json-format, only to stderr, using Winston",
+  "description": "log in json-format, only to stderr, using Bunyan",
   "main": "index.js",
   "scripts": {
     "test": "make test"
@@ -14,7 +14,7 @@
     "logging",
     "stderr",
     "json",
-    "winston"
+    "bunyan"
   ],
   "author": "greglearns",
   "license": "MIT",
@@ -22,12 +22,10 @@
     "url": "https://github.com/greglearns/node-logger-json-stderr/issues"
   },
   "dependencies": {
-    "winston": "~0.7.2",
-    "winston-stderr": "0.0.3"
+    "bunyan": "~0.21.4"
   },
   "devDependencies": {
     "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "tmp": "0.0.21"
+    "mocha": "~1.12.1"
   }
 }

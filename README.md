@@ -14,6 +14,7 @@ Currently, it uses [Bunyan](https://github.com/trentm/node-bunyan) to do the wor
 * log data is written in JSON format
 * all newline characters (\n) in the log data are escaped, such that each log entry has only one unescaped newline at the end of the line -- this makes it easy to split your log files on newlines in order to get each JSON string.
 * objects can be logged as well
+* enables two 'styles' of logger: message first then objects (like Winston), or object first, then message (like Bunyan)
 
 # Installation
 
@@ -23,7 +24,7 @@ npm install -S logger-json-stderr // install and add as a dependency to your pac
 
 # Usage
 
-Basic (verbose) usage:
+Basic (verbose) usage, using the default (Winston) style (message first, then object):
 
 ```javascript
 var options = { name: 'name for the logger', loggingLevel: 'error' }
@@ -45,6 +46,13 @@ Objects can be logged as well
 
 ```javascript
 logger.info('this is a message', { and: 'this is', an: 'object that will be logged' })
+```
+
+Using the Bunyan style (object first, then message)
+
+```javascript
+var logger = require('logger-json-stderr')({ name: "awesome app", style: 'bunyan' })
+logger.info({ an: 'object comes first' }, 'and then this message comes second')
 ```
 
 # Suppressing logging

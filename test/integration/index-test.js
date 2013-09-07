@@ -29,18 +29,40 @@ describe('logger-json-stderr', function() {
     }
   })
 
-  it('should write objects correctly', function(done) {
+  describe('style: bunyan (object first, then message)', function() {
 
-    var msg = 'An object is included with this message.'
-    var objectAsStr = "{ something: 'with a value' }"
-    exec(command({ msg: msg, objectAsStr: objectAsStr }), validate)
+    it('should write objects correctly', function(done) {
 
-    function validate(err, stdout, stderr) {
-      var subject = JSON.parse(stderr)
-      expect(subject.msg).to.equal(msg)
-      expect(subject.something).to.equal('with a value')
-      done()
-    }
+      var msg = 'An object is included with this message.'
+      var objectAsStr = "{ something: 'with a value' }"
+      exec(command({ msg: msg, objectAsStr: objectAsStr, style: 'bunyan' }), validate)
+
+      function validate(err, stdout, stderr) {
+        var subject = JSON.parse(stderr)
+        expect(subject.msg).to.equal(msg)
+        expect(subject.something).to.equal('with a value')
+        done()
+      }
+    })
+
+  })
+
+  describe('style: message-first (default)', function() {
+
+    it('should write objects correctly', function(done) {
+
+      var msg = 'An object is included with this message.'
+      var objectAsStr = "{ something: 'with a value' }"
+      exec(command({ msg: msg, objectAsStr: objectAsStr }), validate)
+
+      function validate(err, stdout, stderr) {
+        var subject = JSON.parse(stderr)
+        expect(subject.msg).to.equal(msg)
+        expect(subject.something).to.equal('with a value')
+        done()
+      }
+    })
+
   })
 
   it('should escape newlines in messages so that each log entry uses only one line', function(done) {
@@ -78,13 +100,17 @@ describe('logger-json-stderr', function() {
 })
 
 function command(opts) {
+  var msg = "'" + opts.msg + "'"
+  var object = opts.objectAsStr ? escape(opts.objectAsStr) : null
+  var loggerArgs = opts.style == 'bunyan' ? [object, msg] : [msg, object]
+  var loggerCreationArgs = opts.style == 'bunyan' ? "{ style: 'bunyan' }" : ''
+
   return [
     'node -e "',
-    "var logger = require('./index')();",
+    "var logger = require('./index')(" + loggerCreationArgs + ");",
     opts.silent ? 'logger.silent(true);' : '',
     'logger.info(',
-    "'" + opts.msg + "'",
-    opts.objectAsStr ? ', ' + escape(opts.objectAsStr) : '',
+    loggerArgs.filter(function(v){return v !== null}).join(','),
     ')',
     '"'
   ].join(' ')

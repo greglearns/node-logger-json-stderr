@@ -13,28 +13,9 @@ module.exports = function(opts) {
     }
   });
 
-  [
-    "fatal",
-    "error",
-    "warn",
-    "info",
-    "debug",
-    "trace",
-  ].forEach(function(fnName) {
-    log[fnName] = (function(fn) {
-      var originalFn = log[fn]
-      return function() {
-        if (arguments.length < 2) { return originalFn.apply(log, arguments) }
-        var args = Array.prototype.slice.call(arguments)
-        var tmp = args[0]
-        args[0] = args[1]
-        args[1] = tmp
-        console.log(arguments)
-        console.log(args)
-        originalFn.apply(log, args)
-      }
-    }(fnName))
-  })
+  if (!opts.style || !opts.style.match(/bunyan/i)) {
+    swapArgOrder()
+  }
 
   log.silent = silent
 
@@ -60,6 +41,31 @@ module.exports = function(opts) {
       statusCode: res.statusCode,
       headers: res.headers()
     }
+  }
+
+  function swapArgOrder() {
+    [
+      "fatal",
+      "error",
+      "warn",
+      "info",
+      "debug",
+      "trace",
+    ].forEach(function(fnName) {
+      log[fnName] = (function(fn) {
+        var originalFn = log[fn]
+        return function() {
+          if (arguments.length < 2) { return originalFn.apply(log, arguments) }
+          var args = Array.prototype.slice.call(arguments)
+          var tmp = args[0]
+          args[0] = args[1]
+          args[1] = tmp
+          console.log(arguments)
+          console.log(args)
+          originalFn.apply(log, args)
+        }
+      }(fnName))
+    })
   }
 
 }

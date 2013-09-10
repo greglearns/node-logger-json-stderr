@@ -60,8 +60,6 @@ module.exports = function(opts) {
           var tmp = args[0]
           args[0] = args[1]
           args[1] = tmp
-          console.log(arguments)
-          console.log(args)
           originalFn.apply(log, args)
         }
       }(fnName))

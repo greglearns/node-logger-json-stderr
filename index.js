@@ -6,7 +6,7 @@ module.exports = function(opts) {
   var log = new Logger({
     name: opts.name || "Logger",
     level: opts.loggingLevel || "info",
-    stream: process.stderr,
+    stream: opts.streams || opts.stream || process.stderr,
     serializers: {
       req: Logger.stdSerializers.req,
       res: resSerializer
